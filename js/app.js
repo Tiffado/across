@@ -1,147 +1,115 @@
-const mapNames = { red: "Rouge", green: "Vert", blue: "Bleu", yellow: "Jaune", turquoise: "Turquoise", void: "Void", necropolis: "Nécropole" };
+{
+  "affixTags": [
+    { "id": "mark", "label_fr": "Marque (Mark)" },
+    { "id": "bleed", "label_fr": "Saignement (Bleed)" },
+    { "id": "bleed_payoff", "label_fr": "Payoff Saignement" },
+    { "id": "leech", "label_fr": "Sangsue (Leech)" },
+    { "id": "dark", "label_fr": "Ténèbres (Dark)" },
+    { "id": "sanctify", "label_fr": "Sanctification" },
+    { "id": "vitality", "label_fr": "Vitalité" },
+    { "id": "fury", "label_fr": "Rage / Fureur (Fury)" },
+    { "id": "sharp", "label_fr": "Tranchant (Sharp)" },
+    { "id": "slash_damage", "label_fr": "Dégâts Tranchants" },
+    { "id": "ranged_damage", "label_fr": "Dégâts à distance" },
+    { "id": "raw_damage", "label_fr": "Dégâts bruts" },
+    { "id": "card_draw", "label_fr": "Pioche de cartes" },
+    { "id": "resistance", "label_fr": "Résistance" },
+    { "id": "hp_max", "label_fr": "PV Max" },
+    { "id": "poison", "label_fr": "Poison" },
+    { "id": "burn", "label_fr": "Brûlure" },
+    { "id": "aura_buff", "label_fr": "Buff d'Aura (%)" },
+    { "id": "powerful", "label_fr": "Puissant" },
+    { "id": "self_damage", "label_fr": "Auto-dégâts" },
+    { "id": "speed", "label_fr": "Vitesse" },
+    { "id": "gold", "label_fr": "Génération d'or" },
+    { "id": "utility", "label_fr": "Utilitaire / autre" }
+  ],
+  "compatibilityRules": [
+    { "id": "elven_cuirass_vs_paladin_gauntlets", "type": "mutually_exclusive_items", "description": "Faeborg (Bleu), Elven Armory : un seul objet par run.", "items": ["elven_cuirass", "paladin_gauntlets"] },
+    { "id": "cuby_holy_vs_dark", "type": "mutually_exclusive_items", "description": "Passage secret Ulminin : Cuby Holy (Laia) ou Cuby Dark (Navalea).", "items": ["cuby_holy", "cuby_dark"] },
+    { "id": "ulminin_great_hall_choice", "type": "mutually_exclusive_items", "description": "Great Hall (Ancient Pyramid, Ulminin) : un seul objet choisi parmi ce tirage par run.", "items": ["durandal", "tesseract", "the_proficient", "the_juggernaut"] }
+  ],
+  "items": [
+    { "id": "tempest", "name": "Tempest", "map": "red", "act": "2/3", "effect": "+4 dégâts d'Arc ; 3x/tour sur Attaque à distance : pioche 1 carte + 1 Sharp", "affixes": ["ranged_damage", "sharp", "card_draw"], "location": "Rouge, branche nord — Harpy Nest (livrer le Sack of Grain obtenu Acte 1)", "confidence": "high" },
+    { "id": "hellblade", "name": "Hellblade", "map": "red", "act": "2/3", "effect": "Permet d'appliquer un fort volume de Marque par tour", "affixes": ["mark", "sharp"], "location": "Rouge, branche sud — Erekhal (drop garanti)", "confidence": "high" },
+    { "id": "edge_of_fury", "name": "Edge of Fury", "map": "red", "act": "2/3", "effect": "Objet orienté Rage/Fury", "affixes": ["fury"], "location": "Rouge, branche centre — Cave (Minotaure)", "confidence": "high" },
+    { "id": "raider_slicer", "name": "Raider Slicer", "map": "red", "act": "2/3", "effect": "Arme mêlée physique", "affixes": ["raw_damage", "slash_damage"], "location": "Rouge, branche centre — Goblin Caves", "confidence": "high" },
+    { "id": "iron_kanabo", "name": "Iron Kanabo", "map": "red", "act": "2/3", "effect": "Arme mêlée physique", "affixes": ["raw_damage"], "location": "Rouge, branche centre — Goblin Caves", "confidence": "high" },
+    { "id": "goblin_amulet", "name": "Goblin Amulet", "map": "red", "act": "2/3", "effect": "Accessoire de récompense", "affixes": ["utility"], "location": "Rouge, branche centre — Goblin Caves", "confidence": "medium" },
+    { "id": "bloodseeker", "name": "Bloodseeker", "map": "green", "act": "2", "effect": "Slash +4, Bleed +2 charges ; applique 2 Bleed à l'impact", "affixes": ["slash_damage", "bleed"], "location": "Vert — west formation (Treasure Hunt, prérequis Small Lake Acte 1)", "confidence": "high" },
+    { "id": "eternal_candle", "name": "Eternal Candle", "map": "green", "act": "2", "effect": "Accessoire de la chaîne du trésor", "affixes": ["utility"], "location": "Vert — west formation (Treasure Hunt)", "confidence": "high" },
+    { "id": "straw_hat", "name": "Straw Hat", "map": "void", "act": "4", "effect": "Chaque tour : 2 pioches, 2 Vitalité, 2 Powerful pour toute l'équipe", "affixes": ["vitality", "card_draw", "aura_buff", "powerful"], "location": "Void — coffre central (chaîne du trésor complète)", "confidence": "high" },
+    { "id": "yin_yang_badge", "name": "Yin Yang Badge", "map": "necropolis", "act": "4", "effect": "Max HP +10 ; chaque Dark appliqué applique 1 Sanctify", "affixes": ["dark", "sanctify", "hp_max"], "location": "Nécropole — localisation exacte non confirmée", "confidence": "medium" },
+    { "id": "penitence_ring", "name": "Penitence Ring", "map": "necropolis", "act": "4", "effect": "Chaque Dark appliqué applique aussi 1 Bleed", "affixes": ["dark", "bleed", "leech"], "location": "Nécropole — Cimetière (Graveyard)", "confidence": "medium" },
+    { "id": "elven_cuirass", "name": "Elven Cuirass", "map": "blue", "act": "2/3", "effect": "Armure", "affixes": ["utility"], "location": "Bleu — Elven Armory (1200 or)", "confidence": "medium" },
+    { "id": "paladin_gauntlets", "name": "Paladin Gauntlets", "map": "blue", "act": "2/3", "effect": "Armure", "affixes": ["utility"], "location": "Bleu — Elven Armory (1200 or)", "confidence": "medium" },
+    { "id": "black_deck", "name": "Black Deck", "map": "blue", "act": "2/3", "effect": "Charges Dark +2 ; explosions Dark à 30", "affixes": ["dark"], "location": "Bleu — Frozen Sewers (vaincre Ratone)", "confidence": "high" },
+    { "id": "blood_goblet", "name": "Blood Goblet", "map": "blue", "act": "2/3", "effect": "Tous dégâts +2 ; par Dark appliqué : applique 1 Bleed", "affixes": ["dark", "bleed", "raw_damage"], "location": "Bleu — Frozen Sewers", "confidence": "high" },
+    { "id": "elven_quiver", "name": "Elven Quiver", "map": "blue", "act": "2/3", "effect": "Accessoire de tir", "affixes": ["ranged_damage"], "location": "Bleu — maison (cité de glace), nécessite Sylvie", "confidence": "medium" },
+    { "id": "lightning_runes", "name": "Lightning Runes", "map": "green", "act": "2/3", "effect": "Bijou", "affixes": ["utility"], "location": "Vert — Sales Booth (accès bateau)", "confidence": "high" },
+    { "id": "golden_cloak", "name": "Golden Cloak", "map": "void", "act": "4", "effect": "Accessoire forgé", "affixes": ["utility"], "location": "Void — The Sacred Forge (Golden Wool requis)", "confidence": "high" },
+    { "id": "luffys_hat", "name": "Luffy's Hat", "map": "void", "act": "4", "effect": "Accessoire de coffre", "affixes": ["utility"], "location": "Void — coffre (2 Mysterious Keys requises)", "confidence": "high" },
+    { "id": "cup_of_death", "name": "Cup of Death", "map": null, "act": null, "effect": "Abaisse le seuil d'explosion Dark", "affixes": ["dark"], "location": "Boutique générique une fois débloqué", "confidence": "medium" },
+    { "id": "the_dark_one", "name": "The Dark One", "map": null, "act": null, "effect": "Stack Dark max +34", "affixes": ["dark"], "location": "Boutique générique une fois débloqué", "confidence": "medium" },
+    { "id": "sahti_pendant", "name": "Sahti Pendant", "map": "turquoise", "act": "2/3", "effect": "Accessoire", "affixes": ["utility"], "location": "Turquoise — boutique Sahti Village", "confidence": "high" },
+    { "id": "mjolnir", "name": "Mjolnir", "map": "turquoise", "act": "2/3", "effect": "Arme", "affixes": ["raw_damage"], "location": "Turquoise — Tentacles, trésor du Kraken (Sigrun requise)", "confidence": "medium" },
+    { "id": "rusty_ring", "name": "Rusty Ring", "map": "turquoise", "act": "2/3", "effect": "Anneau", "affixes": ["utility"], "location": "Turquoise — Sculpted Cave, Big Shell (Bernard conseillé)", "confidence": "medium" },
+    { "id": "cuby_holy", "name": "Cuby (Holy)", "map": "yellow", "act": "2/3", "effect": "Pet — lance Flash", "affixes": [], "location": "Jaune — passage secret (Laia requise)", "confidence": "medium" },
+    { "id": "cuby_dark", "name": "Cuby (Dark)", "map": "yellow", "act": "2/3", "effect": "Pet — lance Dark Flash", "affixes": ["dark"], "location": "Jaune — passage secret (Navalea requise)", "confidence": "medium" },
+    { "id": "archmage_book", "name": "Archmage Book", "map": null, "act": null, "effect": "Tous dégâts +2 [2x/tour] ; à chaque Spell : pioche 1 carte", "affixes": ["raw_damage", "card_draw", "powerful"], "location": "Boutique générique une fois débloqué", "confidence": "high" },
+    { "id": "battle_axe", "name": "Battle Axe", "map": null, "act": null, "effect": "Slash +2, Bleed +2 charges", "affixes": ["slash_damage", "bleed"], "location": "Boutique générique une fois débloqué", "confidence": "high" },
+    { "id": "berserker_claw", "name": "Berserker Claw", "map": null, "act": null, "effect": "Slash +3 [3x/tour] ; +2 Fury par attaque de mêlée", "affixes": ["slash_damage", "fury"], "location": "Boutique générique une fois débloqué", "confidence": "high" },
+    { "id": "bone_claws", "name": "Bone Claws", "map": null, "act": null, "effect": "Applique 1 Bleed à l'impact", "affixes": ["bleed"], "location": "Boutique générique une fois débloqué", "confidence": "high" },
+    { "id": "burning_orb", "name": "Burning Orb", "map": null, "act": null, "effect": "Fire +2, Burn +2 charges", "affixes": ["burn"], "location": "Boutique générique une fois débloqué", "confidence": "high" },
+    { "id": "virulent_ring", "name": "Virulent Ring", "map": null, "act": null, "effect": "Applique 1 Poison par Bleed infligé (auto-empoisonnement possible)", "affixes": ["bleed", "poison"], "location": "Boutique générique une fois débloqué", "confidence": "medium" },
+    { "id": "the_polluter", "name": "The Polluter", "map": "green", "act": "2/3", "effect": "Abaisse résistances, alimente le Dark", "affixes": ["dark", "resistance"], "location": "Vert — Hydre (boss)", "confidence": "medium" },
 
-let DATA = null;
-let state = { acts: new Set(), affixes: new Set(), selectedItem: null };
+    { "id": "charged_trident", "name": "Charged Trident", "map": "green", "act": "2/3", "effect": "Arme épique (effet exact non confirmé)", "affixes": ["raw_damage"], "location": "Vert — Naga Temple, événement normal (\"livre blanc\") — l'événement épique aléatoire (\"livre violet\") au même endroit donne un autre butin", "confidence": "medium" },
 
-async function loadData() {
-  const res = await fetch('data/items.json');
-  DATA = await res.json();
-  buildFilters();
-  render();
+    { "id": "durandal", "name": "Durandal", "map": "yellow", "act": "2/3", "effect": "Gros bonus aux dégâts Tranchants + auto-soin constant", "affixes": ["slash_damage", "utility"], "location": "Jaune (Ulminin) — Great Hall (Ancient Pyramid), tirage de récompense de Basthet", "confidence": "medium" },
+    { "id": "tesseract", "name": "Tesseract", "map": "yellow", "act": "2/3", "effect": "Effet exact non confirmé", "affixes": ["utility"], "location": "Jaune (Ulminin) — Great Hall (Ancient Pyramid), même tirage que Durandal", "confidence": "medium" },
+    { "id": "the_proficient", "name": "The Proficient", "map": "yellow", "act": "2/3", "effect": "Effet exact non confirmé", "affixes": ["utility"], "location": "Jaune (Ulminin) — Great Hall (Ancient Pyramid), même tirage que Durandal", "confidence": "medium" },
+    { "id": "the_juggernaut", "name": "The Juggernaut", "map": "yellow", "act": "2/3", "effect": "Le porteur agit en dernier chaque tour (bon sur Heiner)", "affixes": ["utility"], "location": "Jaune (Ulminin) — Great Hall (Ancient Pyramid), même tirage que Durandal", "confidence": "medium" },
+    { "id": "fists_of_the_damned", "name": "Fists of the Damned", "map": "yellow", "act": "2/3", "effect": "Joue sur l'auto-dégât ; bon pour équipes Dark/Ice/Crack", "affixes": ["self_damage", "dark"], "location": "Jaune (Ulminin) — localisation précise non confirmée", "confidence": "medium" },
+    { "id": "burial_mask", "name": "Burial Mask", "map": "yellow", "act": "2/3", "effect": "Applique le débuff Scourge (très fort pour builds Dark)", "affixes": ["dark"], "location": "Jaune (Ulminin) — drop du boss de la région", "confidence": "medium" },
+    { "id": "crimson_raiment", "name": "Crimson Raiment", "map": "yellow", "act": "2/3", "effect": "Bonne pour builds de dégâts (Laia) ou équipes Wet", "affixes": ["raw_damage"], "location": "Jaune (Ulminin) — localisation précise non confirmée", "confidence": "medium" },
+    { "id": "architects_ring", "name": "Architect's Ring", "map": "yellow", "act": "2/3", "effect": "Anneau drop de boss solide (bon pour Wilbur)", "affixes": ["utility"], "location": "Jaune (Ulminin) — drop de boss", "confidence": "medium" },
+    { "id": "desert_jam", "name": "Desert Jam", "map": "yellow", "act": "2/3", "effect": "Objet de bas niveau", "affixes": ["utility"], "location": "Jaune (Ulminin) — loot générique probable", "confidence": "low" },
+    { "id": "holy_rune", "name": "Holy Rune", "map": "yellow", "act": "2/3", "effect": "Objet de bas niveau conçu pour le spam de Sanctify", "affixes": ["sanctify"], "location": "Jaune (Ulminin) — loot générique probable", "confidence": "low" },
+    { "id": "shadow_rune", "name": "Shadow Rune", "map": "yellow", "act": "2/3", "effect": "Équivalent Dark du Holy Rune", "affixes": ["dark"], "location": "Jaune (Ulminin) — loot générique probable", "confidence": "low" },
+    { "id": "orb_of_corruption", "name": "Orb of Corruption", "map": "yellow", "act": "2/3", "effect": "Utilisé pour corrompre les autels", "affixes": ["utility"], "location": "Jaune (Ulminin) — nœud Altar", "confidence": "high" },
+
+    { "id": "jewelers_ring", "name": "Jeweler's Ring", "map": null, "act": "1", "effect": "Max HP +8, toutes résistances +3%, Vitesse +1", "affixes": ["hp_max", "resistance", "speed"], "location": "Acte 1 — Bridge Path (événement du bijoutier)", "confidence": "high" },
+    { "id": "rope", "name": "Rope", "map": null, "act": "1", "effect": "Objet de sac (permet de jeter un cochon dans un puits)", "affixes": ["utility"], "location": "Acte 1 — événement de la trappe (The Hatch)", "confidence": "medium" },
+
+    { "id": "cloudsong", "name": "Cloudsong", "map": null, "act": null, "effect": "Effet non confirmé", "affixes": ["utility"], "location": "Boutique générique une fois débloqué", "confidence": "low" },
+    { "id": "cooling_servos", "name": "Cooling Servos", "map": null, "act": null, "effect": "Effet non confirmé", "affixes": ["utility"], "location": "Boutique générique une fois débloqué", "confidence": "low" },
+    { "id": "forest_banner", "name": "Forest Banner", "map": null, "act": null, "effect": "Effet non confirmé", "affixes": ["utility"], "location": "Boutique générique une fois débloqué", "confidence": "low" },
+    { "id": "jingle_bell", "name": "Jingle Bell", "map": null, "act": null, "effect": "Effet non confirmé", "affixes": ["utility"], "location": "Boutique générique une fois débloqué", "confidence": "low" },
+    { "id": "mirror_of_kalandra", "name": "Mirror of Kalandra / Kassandra", "map": null, "act": null, "effect": "Effet non confirmé", "affixes": ["utility"], "location": "Boutique générique une fois débloqué", "confidence": "medium" },
+    { "id": "the_one", "name": "The One", "map": null, "act": "4", "effect": "Bijou légendaire, récompense de quête de fin d'Acte 4", "affixes": ["utility"], "location": "Statut incertain — historiquement signalé absent du jeu", "confidence": "low" },
+    { "id": "heater_shield", "name": "Heater Shield", "map": null, "act": null, "effect": "Armure", "affixes": ["utility"], "location": "Boutique générique une fois débloqué", "confidence": "medium" },
+    { "id": "boots_of_swiftness", "name": "Boots of Swiftness", "map": null, "act": null, "effect": "Armure — bonus de vitesse probable", "affixes": ["speed"], "location": "Boutique générique une fois débloqué", "confidence": "medium" },
+    { "id": "berserk_potion", "name": "Berserk Potion", "map": null, "act": null, "effect": "Accessoire", "affixes": ["fury"], "location": "Boutique générique une fois débloqué", "confidence": "medium" },
+    { "id": "power_glove", "name": "Power Glove", "map": null, "act": null, "effect": "Accessoire", "affixes": ["raw_damage"], "location": "Boutique générique une fois débloqué", "confidence": "medium" },
+
+    { "id": "feather_earrings", "name": "Feather Earrings", "map": "green", "act": "2/3", "effect": "Bijou/accessoire", "affixes": ["utility"], "location": "Vert — nœud Arena (butin du Great Bird, tirage de 8 objets)", "confidence": "high" },
+    { "id": "mask_of_tolerance", "name": "Mask of Tolerance", "map": "green", "act": "2/3", "effect": "Accessoire", "affixes": ["resistance"], "location": "Vert — nœud Arena (butin du Great Bird)", "confidence": "high" },
+    { "id": "ignidohs_core", "name": "Ignidoh's Core", "map": "red", "act": "2/3", "effect": "Tous les 2 tours, place une carte Heat Assimilation en main (consomme les stacks de Burning)", "affixes": ["burn"], "location": "Rouge — récompense de quête/boss liée à la zone de feu", "confidence": "medium" },
+    { "id": "hydra_egg", "name": "Hydra Egg", "map": "green", "act": "2/3", "effect": "Objet de sac/quête", "affixes": ["utility"], "location": "Vert — fin de zone, boss Hydra", "confidence": "medium" },
+
+    { "id": "golden_chalice", "name": "Golden Chalice", "map": "turquoise", "act": "2/3", "effect": "Accessoire/objet", "affixes": ["utility"], "location": "Turquoise — nœud Fortress (forteresse de Whitebeard), tirage \"Clever Item\"", "confidence": "high" },
+    { "id": "golden_cross", "name": "Golden Cross", "map": "turquoise", "act": "2/3", "effect": "Objet", "affixes": ["utility"], "location": "Turquoise — nœud Fortress", "confidence": "high" },
+    { "id": "gold_ring", "name": "Gold Ring", "map": "turquoise", "act": "2/3", "effect": "Bijou", "affixes": ["utility"], "location": "Turquoise — nœud Fortress", "confidence": "high" },
+    { "id": "golden_harp", "name": "Golden Harp", "map": "turquoise", "act": "2/3", "effect": "Objet", "affixes": ["utility"], "location": "Turquoise — nœud Fortress", "confidence": "high" },
+    { "id": "fish_cage", "name": "Fish Cage", "map": "turquoise", "act": "2/3", "effect": "Objet de sac", "affixes": ["utility"], "location": "Turquoise — boutique Sahti Village", "confidence": "high" },
+    { "id": "fishbone_soup", "name": "Fishbone Soup", "map": "turquoise", "act": "2/3", "effect": "Objet de sac", "affixes": ["utility"], "location": "Turquoise — boutique Sahti Village", "confidence": "high" },
+    { "id": "salt", "name": "Salt", "map": "turquoise", "act": "2/3", "effect": "Objet de sac", "affixes": ["utility"], "location": "Turquoise — boutique Sahti Village", "confidence": "high" },
+    { "id": "fishing_rod", "name": "Fishing Rod", "map": "turquoise", "act": "2/3", "effect": "Objet de sac", "affixes": ["utility"], "location": "Turquoise — boutique Sahti Village", "confidence": "high" },
+
+    { "id": "jeweled_key", "name": "Jeweled Key", "map": "blue", "act": "2/3", "effect": "Objet de quête — déverrouille l'entrée des égouts / déblocage de Zek", "affixes": ["utility"], "location": "Bleu — Frozen Sewers / Sewer Outlet", "confidence": "high" },
+    { "id": "mysterious_key_green", "name": "Mysterious Key", "map": "void", "act": "4", "effect": "Ouvre le coffre de jade", "affixes": ["utility"], "location": "Void — nœud Treasure", "confidence": "high" },
+    { "id": "small_log", "name": "Small Log", "map": "red", "act": "2/3", "effect": "Objet de sac (quête pet beaver)", "affixes": ["utility"], "location": "Rouge — village goblin (récompense de combat)", "confidence": "medium" },
+    { "id": "golden_wool", "name": "Golden Wool", "map": null, "act": "1", "effect": "Matière première — à forger en Golden Cloak à l'Acte 4", "affixes": ["utility"], "location": "Obtenu via la quête de Betty", "confidence": "medium" }
+  ]
 }
-
-function buildFilters() {
-  const acts = ["1", "2/3", "4"];
-  const actContainer = document.getElementById('act-filters');
-  acts.forEach(a => {
-    const row = document.createElement('div');
-    row.className = 'checkbox-row';
-    const id = 'act-' + a.replace('/', '');
-    row.innerHTML = `<input type="checkbox" id="${id}"><label for="${id}">Acte ${a}</label>`;
-    row.querySelector('input').addEventListener('change', e => {
-      if (e.target.checked) state.acts.add(a); else state.acts.delete(a);
-      render();
-    });
-    actContainer.appendChild(row);
-  });
-
-  const affixContainer = document.getElementById('affix-filters');
-  DATA.affixTags.forEach(tag => {
-    const count = DATA.items.filter(i => i.affixes.includes(tag.id)).length;
-    if (count === 0) return;
-    const row = document.createElement('div');
-    row.className = 'checkbox-row';
-    const id = 'affix-' + tag.id;
-    row.innerHTML = `<input type="checkbox" id="${id}"><label for="${id}">${tag.label_fr}</label><span class="count">${count}</span>`;
-    row.querySelector('input').addEventListener('change', e => {
-      if (e.target.checked) state.affixes.add(tag.id); else state.affixes.delete(tag.id);
-      render();
-    });
-    affixContainer.appendChild(row);
-  });
-}
-
-function getConflictReason(itemId, otherId) {
-  for (const rule of DATA.compatibilityRules) {
-    if (rule.type === 'mutually_exclusive_items' && rule.items.includes(itemId) && rule.items.includes(otherId) && itemId !== otherId) {
-      return rule.description;
-    }
-  }
-  return null;
-}
-
-function isIncompatible(item) {
-  if (!state.selectedItem) return false;
-  if (item.id === state.selectedItem.id) return false;
-  const directConflict = getConflictReason(item.id, state.selectedItem.id);
-  if (directConflict) return directConflict;
-  if (item.map && state.selectedItem.map && item.map !== state.selectedItem.map) {
-    const bothPortalMaps = ["red", "green", "blue", "yellow", "turquoise"];
-    const bothAct4Maps = ["void", "necropolis"];
-    if (bothPortalMaps.includes(item.map) && bothPortalMaps.includes(state.selectedItem.map)) {
-      return "Cartes différentes en Acte 2/3 — vérifiez que vos 2 portails de run incluent bien les deux.";
-    }
-    if (bothAct4Maps.includes(item.map) && bothAct4Maps.includes(state.selectedItem.map)) {
-      return "Void et Nécropole sont mutuellement exclusifs en Acte 4.";
-    }
-  }
-  return false;
-}
-
-function selectItem(item) {
-  state.selectedItem = state.selectedItem && state.selectedItem.id === item.id ? null : item;
-  render();
-}
-
-function clearSelection() {
-  state.selectedItem = null;
-  render();
-}
-
-function resetFilters() {
-  state.acts.clear();
-  state.affixes.clear();
-  state.selectedItem = null;
-  document.querySelectorAll('aside input[type=checkbox]').forEach(c => c.checked = false);
-  render();
-}
-
-function render() {
-  const grid = document.getElementById('item-grid');
-  grid.innerHTML = '';
-
-  let items = DATA.items;
-  if (state.acts.size > 0) {
-    items = items.filter(i => i.act && [...state.acts].some(a => i.act.includes(a)));
-  }
-  if (state.affixes.size > 0) {
-    items = items.filter(i => [...state.affixes].every(a => i.affixes.includes(a)));
-  }
-
-  const banner = document.getElementById('selected-banner');
-  if (state.selectedItem) {
-    banner.classList.add('active');
-    document.getElementById('selected-name').textContent = state.selectedItem.name;
-  } else {
-    banner.classList.remove('active');
-  }
-
-  document.getElementById('result-count').textContent = items.length + ' objet(s) affiché(s)';
-
-  if (items.length === 0) {
-    grid.innerHTML = '<div class="empty">Aucun objet ne correspond à ces filtres.</div>';
-    return;
-  }
-
-  items.forEach(item => {
-    const conflict = isIncompatible(item);
-    const card = document.createElement('div');
-    card.className = 'item-card';
-    if (state.selectedItem && state.selectedItem.id === item.id) card.classList.add('selected');
-    if (conflict) card.classList.add('incompatible');
-
-    const mapLabel = item.map ? mapNames[item.map] : 'Générique';
-    const actLabel = item.act ? 'Acte ' + item.act : '—';
-
-    card.innerHTML = `
-      <p class="item-name">${item.name}</p>
-      <p class="item-meta">${mapLabel} · ${actLabel} · confiance ${item.confidence}</p>
-      <p class="item-effect">${item.effect}</p>
-      <div class="tag-row">${item.affixes.map(a => `<span class="tag">${DATA.affixTags.find(t => t.id === a)?.label_fr || a}</span>`).join('')}</div>
-      <p class="location-note">${item.location}</p>
-      ${conflict ? `<div class="conflict-note">Incompatible : ${conflict}</div>` : ''}
-    `;
-
-    card.addEventListener('click', () => {
-      if (conflict) return;
-      selectItem(item);
-    });
-
-    grid.appendChild(card);
-  });
-}
-
-document.getElementById('reset-btn').addEventListener('click', resetFilters);
-document.getElementById('clear-selection-btn').addEventListener('click', clearSelection);
-
-loadData();
