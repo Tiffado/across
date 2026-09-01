@@ -8,6 +8,7 @@ Aucune installation nécessaire — c'est un site statique.
 
 - **En local** : ouvre `index.html` dans un navigateur, ou lance un petit serveur (`python3 -m http.server`) depuis ce dossier, car `fetch()` ne charge pas toujours un fichier JSON en local sans serveur selon le navigateur.
 - **En ligne (GitHub Pages)** : Settings → Pages → Deploy from branch → `main` / `/ (root)`. L'app sera accessible à `https://<ton-user>.github.io/<nom-du-repo>/`.
+- https://tiffado.github.io/across/
 
 ## Structure
 
